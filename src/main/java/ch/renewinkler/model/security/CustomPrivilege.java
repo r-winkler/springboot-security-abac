@@ -19,11 +19,15 @@ public class CustomPrivilege {
     @GeneratedValue
     private Long id;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private PrivilegeType type;
 
     @ManyToOne
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    private User user;
 
 }

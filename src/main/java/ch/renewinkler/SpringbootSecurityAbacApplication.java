@@ -6,9 +6,7 @@ import ch.renewinkler.model.security.PrivilegeType;
 import ch.renewinkler.model.security.Role;
 import ch.renewinkler.model.security.User;
 import ch.renewinkler.repository.CategoryRepository;
-import ch.renewinkler.repository.CustomPrivilegeRepository;
 import ch.renewinkler.repository.RoleRepository;
-import ch.renewinkler.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,6 +16,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @SpringBootApplication
@@ -29,12 +28,6 @@ public class SpringbootSecurityAbacApplication implements CommandLineRunner {
 
     @Autowired
     RoleRepository roleRepo;
-
-    @Autowired
-    UserRepository userRepo;
-
-    @Autowired
-    CustomPrivilegeRepository customPrivilegeRepo;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -58,25 +51,46 @@ public class SpringbootSecurityAbacApplication implements CommandLineRunner {
         categoryRepo.save(category4);
         categoryRepo.save(category5);
 
+
         // roles and users
         Role adminRole = Role.builder().name("ROLE_ADMIN").build();
+        Role userRole = Role.builder().name("USER_ADMIN").build();
         User admin = User.builder().username("admin")
                 .password(passwordEncoder.encode("admin"))
                 .enabled(true).build();
-        List<User> users = new ArrayList<>();
-        users.add(admin);
-        adminRole.setUsers(users);
+        User user = User.builder().username("user")
+                .password(passwordEncoder.encode("user"))
+                .enabled(true).build();
+        adminRole.setUsers(Arrays.asList(admin));
+        userRole.setUsers(Arrays.asList(user));
         roleRepo.save(adminRole);
+        roleRepo.save(userRole);
 
         // custom privilege
         CustomPrivilege customPrivilege1 = CustomPrivilege.builder()
                 .type(PrivilegeType.READ)
                 .category(category2)
+                .user(user)
                 .build();
-        customPrivilegeRepo.save(customPrivilege1);
+        CustomPrivilege customPrivilege2 = CustomPrivilege.builder()
+                .type(PrivilegeType.READ)
+                .category(category4)
+                .user(user)
+                .build();
         List<CustomPrivilege> customPrivileges = new ArrayList<>();
         customPrivileges.add(customPrivilege1);
-        admin.setCustomPrivileges(customPrivileges);
-        userRepo.save(admin);
+        customPrivileges.add(customPrivilege2);
+        user.setCustomPrivileges(customPrivileges);
+
+        category2.setCustomPrivileges(Arrays.asList(customPrivilege1));
+        category4.setCustomPrivileges(Arrays.asList(customPrivilege2));
+
+        categoryRepo.save(category2);
+        categoryRepo.save(category4);
+
+
+
+
+
     }
 }
