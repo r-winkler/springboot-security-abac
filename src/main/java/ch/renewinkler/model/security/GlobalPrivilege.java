@@ -1,21 +1,16 @@
 package ch.renewinkler.model.security;
 
+import ch.renewinkler.model.BaseEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
 @Entity
 @NoArgsConstructor
 @Data
-public class GlobalPrivilege {
-
-    @Id
-    @GeneratedValue
-    private Long id;
+public class GlobalPrivilege extends BaseEntity {
 
     @Enumerated
     private PrivilegeType type;

@@ -11,7 +11,7 @@ public class CategoryTest {
 
     @Test
     public void testHasCustomPrivilege() {
-        Category category = Category.builder().id(1l).name("category").build();
+        Category category = Category.builder().name("category").build();
         CustomPrivilege customPrivilege = CustomPrivilege.builder().category(category).type(PrivilegeType.READ).build();
         List<CustomPrivilege> customPrivileges = new ArrayList<>();
         customPrivileges.add(customPrivilege);

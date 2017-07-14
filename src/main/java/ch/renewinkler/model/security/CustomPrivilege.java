@@ -1,5 +1,6 @@
 package ch.renewinkler.model.security;
 
+import ch.renewinkler.model.BaseEntity;
 import ch.renewinkler.model.Category;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,11 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Data
-public class CustomPrivilege {
-
-    @Id
-    @GeneratedValue
-    private Long id;
+public class CustomPrivilege extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private PrivilegeType type;
