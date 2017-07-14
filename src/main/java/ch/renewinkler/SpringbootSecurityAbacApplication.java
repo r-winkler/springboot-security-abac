@@ -59,7 +59,7 @@ public class SpringbootSecurityAbacApplication implements CommandLineRunner {
         categoryRepo.save(category5);
 
         // roles and users
-        Role adminRole = Role.builder().name("ADMIN").build();
+        Role adminRole = Role.builder().name("ROLE_ADMIN").build();
         User admin = User.builder().username("admin")
                 .password(passwordEncoder.encode("admin"))
                 .enabled(true).build();

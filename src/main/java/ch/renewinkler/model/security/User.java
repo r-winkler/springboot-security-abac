@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -28,7 +27,6 @@ public class User {
     private String username;
 
     @NotNull
-    @Min(5)
     private String password;
 
     private boolean enabled;
