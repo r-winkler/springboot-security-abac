@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +22,8 @@ public class Role {
     @GeneratedValue
     private Long id;
 
+    @NotNull
+    @Size(min = 3, max = 50)
     private String name;
 
     @OneToMany(cascade = CascadeType.PERSIST)
