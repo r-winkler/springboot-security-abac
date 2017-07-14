@@ -1,0 +1,52 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: rwinkler
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: admin
+              - column:
+                  name: password
+                  value: admin
+              - column:
+                  name: enabled
+                  value: true
+
+  - changeSet:
+      id: 2
+      author: rwinkler
+      changes:
+        - insert:
+            tableName: category
+            columns:
+              - column:
+                  name: name
+                  value: category_1
+        - insert:
+            tableName: category
+            columns:
+              - column:
+                  name: name
+                  value: category_2
+        - insert:
+            tableName: category
+            columns:
+              - column:
+                  name: name
+                  value: category_3
+        - insert:
+            tableName: category
+            columns:
+              - column:
+                  name: name
+                  value: category_4
+        - insert:
+            tableName: category
+            columns:
+              - column:
+                  name: name
+                  value: category_5
