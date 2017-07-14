@@ -25,4 +25,5 @@ public class CustomPrivilege {
     @ManyToOne
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
+
 }

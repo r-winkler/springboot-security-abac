@@ -19,4 +19,5 @@ public class GlobalPrivilege {
 
     @Enumerated
     private PrivilegeType type;
+    
 }
