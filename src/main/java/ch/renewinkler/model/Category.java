@@ -12,6 +12,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@ToString
 @Builder
 @Data
 public class Category extends PrivilegeEntity {

@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@ToString
 @Builder
 @Data
 public class GlobalPrivilege extends BaseEntity {

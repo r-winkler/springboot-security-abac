@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@ToString
 @Builder
 @Data
 public class User extends BaseEntity {

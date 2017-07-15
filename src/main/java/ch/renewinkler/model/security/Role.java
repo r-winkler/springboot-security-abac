@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@ToString
 @Builder
 @Data
 public class Role extends BaseEntity {

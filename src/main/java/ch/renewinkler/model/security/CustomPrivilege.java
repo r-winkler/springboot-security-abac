@@ -10,6 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@ToString
 @Builder
 @Data
 public class CustomPrivilege extends BaseEntity {
