@@ -4,6 +4,7 @@ import ch.renewinkler.model.Category;
 import ch.renewinkler.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PostFilter;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +15,10 @@ public class CategoryService {
     @Autowired
     private CategoryRepository repo;
 
-    // TODO: user principal via id oder so...
-    @PostFilter("hasRole('ROLE_ADMIN') or filterObject.hasCustomPrivilege(authentication.name, T(ch.renewinkler.model.security.PrivilegeType).READ)")
+    @PreAuthorize("hasAnyRole({'ROLE_USER', 'ROLE_ADMIN'})")
+    // This was the original PostFilter SPEL. Subsequently, it was placed in a separate class.
+    // @PostFilter("hasRole('ROLE_ADMIN') or filterObject.hasCustomPrivilege(authentication.name, T(ch.renewinkler.model.security.PrivilegeType).READ)")
+    @PostFilter("hasRole('ROLE_ADMIN') or hasPermission(filterObject, 'read')")
     public List<Category> findAll() {
         return repo.findAll();
     }

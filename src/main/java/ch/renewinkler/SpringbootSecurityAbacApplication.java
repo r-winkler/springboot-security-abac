@@ -44,17 +44,23 @@ public class SpringbootSecurityAbacApplication implements CommandLineRunner {
 
         // roles and users
         Role adminRole = Role.builder().name("ROLE_ADMIN").build();
-        Role userRole = Role.builder().name("USER_ADMIN").build();
+        Role userRole = Role.builder().name("ROLE_USER").build();
+        Role anyRole = Role.builder().name("ROLE_ANY").build();
         User admin = User.builder().username("admin")
                 .password(passwordEncoder.encode("admin"))
                 .enabled(true).build();
         User user = User.builder().username("user")
                 .password(passwordEncoder.encode("user"))
                 .enabled(true).build();
-        adminRole.addUser(admin);
-        userRole.addUser(user);
+        User any = User.builder().username("any")
+                .password(passwordEncoder.encode("any"))
+                .enabled(true).build();
+        admin.addRole(adminRole);
+        user.addRole(userRole);
+        any.addRole(anyRole);
         roleRepo.save(adminRole);
         roleRepo.save(userRole);
+        roleRepo.save(anyRole);
 
         // custom privilege
         CustomPrivilege customPrivilege1 = CustomPrivilege.builder()

@@ -34,16 +34,6 @@ public class Role extends BaseEntity {
     @OneToMany(mappedBy = "role", cascade = CascadeType.PERSIST)
     private List<GlobalPrivilege> globalPrivileges = new ArrayList<>();
 
-    public void addUser(User user) {
-        users.add(user);
-        user.getRoles().add(this);
-    }
-
-    public void removeUser(User user) {
-        users.remove(user);
-        user.getRoles().remove(this);
-    }
-
     public void addGlobalPrivilege(GlobalPrivilege globalPrivilege) {
         globalPrivileges.add(globalPrivilege);
         globalPrivilege.setRole(this);
