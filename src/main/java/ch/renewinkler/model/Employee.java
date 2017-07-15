@@ -14,10 +14,17 @@ import javax.validation.constraints.Size;
 @ToString
 @Builder
 @Data
-public class Category extends PrivilegeEntity {
+public class Employee extends PrivilegeEntity {
 
     @NotNull
     @Size(min = 3, max = 50)
-    private String name;
+    private String firstname;
+
+    @NotNull
+    @Size(min = 3, max = 50)
+    private String lastname;
+
+    @NotNull
+    private Long salary;
 
 }

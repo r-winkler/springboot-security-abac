@@ -1,5 +1,7 @@
-package ch.renewinkler.model.security;
+package ch.renewinkler.util.security;
 
+import ch.renewinkler.model.security.PrivilegeEntity;
+import ch.renewinkler.model.security.PrivilegeType;
 import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.core.Authentication;
 

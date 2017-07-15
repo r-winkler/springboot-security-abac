@@ -1,7 +1,6 @@
 package ch.renewinkler.model.security;
 
 import ch.renewinkler.model.BaseEntity;
-import ch.renewinkler.model.Category;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,8 +18,8 @@ public class CustomPrivilege extends BaseEntity {
     private PrivilegeType type;
 
     @ManyToOne
-    @JoinColumn(name = "CATEGORY_ID")
-    private Category category;
+    @JoinColumn(name = "PRIVILEGE_ENTITY_ID")
+    private PrivilegeEntity privilegeEntity;
 
     @ManyToOne
     @JoinColumn(name = "USER_ID")

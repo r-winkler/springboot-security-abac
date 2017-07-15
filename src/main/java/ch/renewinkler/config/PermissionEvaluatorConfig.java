@@ -1,6 +1,6 @@
 package ch.renewinkler.config;
 
-import ch.renewinkler.model.security.EntityPermissionEvaluator;
+import ch.renewinkler.util.security.EntityPermissionEvaluator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
