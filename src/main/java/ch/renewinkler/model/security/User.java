@@ -34,6 +34,7 @@ public class User extends BaseEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<CustomPrivilege> customPrivileges = new ArrayList<>();
 
     public void addCustomPrivilege(CustomPrivilege customPrivilege) {

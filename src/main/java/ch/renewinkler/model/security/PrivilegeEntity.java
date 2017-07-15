@@ -2,6 +2,7 @@ package ch.renewinkler.model.security;
 
 import ch.renewinkler.model.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.CascadeType;
@@ -16,6 +17,7 @@ public abstract class PrivilegeEntity extends BaseEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<CustomPrivilege> customPrivileges = new ArrayList<>();
 
     public boolean hasCustomPrivilege(String name, PrivilegeType type) {

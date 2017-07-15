@@ -25,9 +25,11 @@ public class Role extends BaseEntity {
     private String name;
 
     @OneToMany(cascade = CascadeType.PERSIST)
+    @Builder.Default
     private List<User> users = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.PERSIST)
+    @Builder.Default
     private List<GlobalPrivilege> globalPrivileges = new ArrayList<>();
 
     public void addUser(User user) {
