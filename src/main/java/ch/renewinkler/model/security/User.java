@@ -4,7 +4,10 @@ import ch.renewinkler.model.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -28,13 +31,13 @@ public class User extends BaseEntity {
 
     private boolean enabled;
 
-    @ManyToOne
-    @JoinColumn(name = "ROLE_ID")
-    private Role role;
+    @Builder.Default
+    @ManyToMany(mappedBy = "users")
+    private List<Role> roles = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CustomPrivilege> customPrivileges = new ArrayList<>();
 
     public void addCustomPrivilege(CustomPrivilege customPrivilege) {

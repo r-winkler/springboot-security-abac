@@ -16,8 +16,8 @@ import java.util.List;
 public abstract class PrivilegeEntity extends BaseEntity {
 
     @JsonIgnore
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CustomPrivilege> customPrivileges = new ArrayList<>();
 
     public boolean hasCustomPrivilege(String name, PrivilegeType type) {

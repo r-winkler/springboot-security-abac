@@ -3,9 +3,7 @@ package ch.renewinkler.model.security;
 import ch.renewinkler.model.BaseEntity;
 import lombok.*;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -24,22 +22,26 @@ public class Role extends BaseEntity {
     @Size(min = 3, max = 50)
     private String name;
 
-    @OneToMany(mappedBy = "role", cascade = CascadeType.PERSIST)
     @Builder.Default
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "ROLE_USER",
+            joinColumns = {@JoinColumn(name = "ROLE_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "USER_ID")})
     private List<User> users = new ArrayList<>();
 
-    @OneToMany(mappedBy = "role", cascade = CascadeType.PERSIST)
     @Builder.Default
+    @OneToMany(mappedBy = "role", cascade = CascadeType.PERSIST)
     private List<GlobalPrivilege> globalPrivileges = new ArrayList<>();
 
     public void addUser(User user) {
         users.add(user);
-        user.setRole(this);
+        user.getRoles().add(this);
     }
 
     public void removeUser(User user) {
         users.remove(user);
-        user.setRole(null);
+        user.getRoles().remove(this);
     }
 
     public void addGlobalPrivilege(GlobalPrivilege globalPrivilege) {

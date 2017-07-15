@@ -48,8 +48,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .dataSource(dataSource)
                 .usersByUsernameQuery("select username, password, enabled from user where username=?")
                 // roles are authortities with prefix ROLE_
-                .authoritiesByUsernameQuery("select u.username, a.name from user u join role a " +
-                        "on u.role_id = a.id where username = ?")
+                .authoritiesByUsernameQuery("select u.username, r.name from user u \n" +
+                        "join role_user ru on u.id = ru.user_id\n" +
+                        "join role r on r.id = ru.role_id\n" +
+                        " where username = ?")
                 .passwordEncoder(passwordEncoder());
     }
 
