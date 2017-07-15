@@ -15,10 +15,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 public class SpringbootSecurityAbacApplication implements CommandLineRunner {
@@ -61,8 +57,8 @@ public class SpringbootSecurityAbacApplication implements CommandLineRunner {
         User user = User.builder().username("user")
                 .password(passwordEncoder.encode("user"))
                 .enabled(true).build();
-        adminRole.setUsers(Arrays.asList(admin));
-        userRole.setUsers(Arrays.asList(user));
+        adminRole.addUser(admin);
+        userRole.addUser(user);
         roleRepo.save(adminRole);
         roleRepo.save(userRole);
 
@@ -77,13 +73,10 @@ public class SpringbootSecurityAbacApplication implements CommandLineRunner {
                 .category(category4)
                 .user(user)
                 .build();
-        List<CustomPrivilege> customPrivileges = new ArrayList<>();
-        customPrivileges.add(customPrivilege1);
-        customPrivileges.add(customPrivilege2);
-        user.setCustomPrivileges(customPrivileges);
-
-        category2.setCustomPrivileges(Arrays.asList(customPrivilege1));
-        category4.setCustomPrivileges(Arrays.asList(customPrivilege2));
+        user.addCustomPrivilege(customPrivilege1);
+        user.addCustomPrivilege(customPrivilege2);
+        category2.addCustomPrivilege(customPrivilege1);
+        category4.addCustomPrivilege(customPrivilege2);
 
         categoryRepo.save(category2);
         categoryRepo.save(category4);

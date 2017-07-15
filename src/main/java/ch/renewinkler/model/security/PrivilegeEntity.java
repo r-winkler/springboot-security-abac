@@ -7,6 +7,7 @@ import lombok.Data;
 import javax.persistence.CascadeType;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -15,7 +16,7 @@ public abstract class PrivilegeEntity extends BaseEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CustomPrivilege> customPrivileges;
+    private List<CustomPrivilege> customPrivileges = new ArrayList<>();
 
     public boolean hasCustomPrivilege(String name, PrivilegeType type) {
         return customPrivileges.stream()

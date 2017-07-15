@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,10 +25,10 @@ public class Role extends BaseEntity {
     private String name;
 
     @OneToMany(cascade = CascadeType.PERSIST)
-    private List<User> users;
+    private List<User> users = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.PERSIST)
-    private List<GlobalPrivilege> globalPrivileges;
+    private List<GlobalPrivilege> globalPrivileges = new ArrayList<>();
 
     public void addUser(User user) {
         users.add(user);
