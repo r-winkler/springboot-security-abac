@@ -1,8 +1,7 @@
 package ch.renewinkler.model.security;
 
 import ch.renewinkler.model.BaseEntity;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -11,6 +10,9 @@ import javax.persistence.ManyToOne;
 
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+@Builder
 @Data
 public class GlobalPrivilege extends BaseEntity {
 
