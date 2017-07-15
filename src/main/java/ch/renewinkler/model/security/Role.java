@@ -8,11 +8,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,11 +25,29 @@ public class Role extends BaseEntity {
     private String name;
 
     @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "ROLE_ID")
-    private List<User> users = new ArrayList<>();
+    private List<User> users;
 
     @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "ROLE_ID")
-    private List<GlobalPrivilege> globalPrivileges = new ArrayList<>();
+    private List<GlobalPrivilege> globalPrivileges;
+
+    public void addUser(User user) {
+        users.add(user);
+        user.setRole(this);
+    }
+
+    public void removeUser(User user) {
+        users.remove(user);
+        user.setRole(null);
+    }
+
+    public void addGlobalPrivilege(GlobalPrivilege globalPrivilege) {
+        globalPrivileges.add(globalPrivilege);
+        globalPrivilege.setRole(this);
+    }
+
+    public void removeGlobalPrivilege(GlobalPrivilege globalPrivilege) {
+        globalPrivileges.remove(globalPrivilege);
+        globalPrivilege.setRole(null);
+    }
 
 }

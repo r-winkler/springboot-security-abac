@@ -14,6 +14,7 @@ public class CategoryService {
     @Autowired
     private CategoryRepository repo;
 
+    // TODO: user principal via id oder so...
     @PostFilter("hasRole('ROLE_ADMIN') or filterObject.hasCustomPrivilege(authentication.name, T(ch.renewinkler.model.security.PrivilegeType).READ)")
     public List<Category> findAll() {
         return repo.findAll();
