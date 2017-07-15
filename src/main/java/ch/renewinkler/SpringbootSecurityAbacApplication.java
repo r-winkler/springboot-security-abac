@@ -48,12 +48,14 @@ public class SpringbootSecurityAbacApplication implements CommandLineRunner {
         Category category3 = Category.builder().name("category3").build();
         Category category4 = Category.builder().name("category4").build();
         Category category5 = Category.builder().name("category5").build();
+        categoryRepo.save(Arrays.asList(category1, category2, category3, category4, category5));
 
         // employees
         Employee employee1 = Employee.builder().firstname("AAA").lastname("BBB").salary(5000l).build();
         Employee employee2 = Employee.builder().firstname("CCC").lastname("DDD").salary(10000l).build();
         Employee employee3 = Employee.builder().firstname("EEE").lastname("FFF").salary(2000l).build();
         Employee employee4 = Employee.builder().firstname("GGG").lastname("HHH").salary(35000l).build();
+        employeeRepos.save(Arrays.asList(employee1, employee2, employee3, employee4));
 
         // roles and users
         Role adminRole = Role.builder().name("ROLE_ADMIN").build();
@@ -75,24 +77,31 @@ public class SpringbootSecurityAbacApplication implements CommandLineRunner {
         roleRepo.save(userRole);
         roleRepo.save(anyRole);
 
-        // custom privilege
+        // custom privileges
         CustomPrivilege customPrivilege1 = CustomPrivilege.builder()
                 .type(PrivilegeType.READ)
-                .privilegeEntity(category2)
                 .user(user)
                 .build();
         CustomPrivilege customPrivilege2 = CustomPrivilege.builder()
                 .type(PrivilegeType.READ)
-                .privilegeEntity(category4)
+                .user(user)
+                .build();
+        CustomPrivilege customPrivilege3 = CustomPrivilege.builder()
+                .type(PrivilegeType.READ)
+                .user(user)
+                .build();
+        CustomPrivilege customPrivilege4 = CustomPrivilege.builder()
+                .type(PrivilegeType.READ)
                 .user(user)
                 .build();
         user.addCustomPrivilege(customPrivilege1);
         user.addCustomPrivilege(customPrivilege2);
         category2.addCustomPrivilege(customPrivilege1);
         category4.addCustomPrivilege(customPrivilege2);
-
-        categoryRepo.save(Arrays.asList(category1, category2, category3, category4, category5));
-        employeeRepos.save(Arrays.asList(employee1, employee2, employee3, employee4));
+        employee3.addCustomPrivilege(customPrivilege3);
+        employee4.addCustomPrivilege(customPrivilege4);
+        categoryRepo.save(Arrays.asList(category2, category4));
+        employeeRepos.save(Arrays.asList(employee3, employee4));
 
     }
 }
