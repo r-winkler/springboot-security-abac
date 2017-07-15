@@ -41,12 +41,6 @@ public class SpringbootSecurityAbacApplication implements CommandLineRunner {
         Category category3 = Category.builder().name("category3").build();
         Category category4 = Category.builder().name("category4").build();
         Category category5 = Category.builder().name("category5").build();
-        categoryRepo.save(category1);
-        categoryRepo.save(category2);
-        categoryRepo.save(category3);
-        categoryRepo.save(category4);
-        categoryRepo.save(category5);
-
 
         // roles and users
         Role adminRole = Role.builder().name("ROLE_ADMIN").build();
@@ -78,8 +72,11 @@ public class SpringbootSecurityAbacApplication implements CommandLineRunner {
         category2.addCustomPrivilege(customPrivilege1);
         category4.addCustomPrivilege(customPrivilege2);
 
+        categoryRepo.save(category1);
         categoryRepo.save(category2);
+        categoryRepo.save(category3);
         categoryRepo.save(category4);
+        categoryRepo.save(category5);
 
 
 
