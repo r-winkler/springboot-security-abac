@@ -1,6 +1,8 @@
 package ch.renewinkler.model;
 
+import ch.renewinkler.controller.JsonViews;
 import ch.renewinkler.model.security.PrivilegeEntity;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -10,7 +12,6 @@ import javax.validation.constraints.Size;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @ToString
 @Builder
 @Data
@@ -25,6 +26,7 @@ public class Employee extends PrivilegeEntity {
     private String lastname;
 
     @NotNull
+    @JsonView(JsonViews.SalaryView.class)
     private Long salary;
 
 }

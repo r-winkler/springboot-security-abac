@@ -1,6 +1,7 @@
 package ch.renewinkler.model.security;
 
 import ch.renewinkler.model.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,8 +13,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
-@ToString
+@ToString(exclude = {"users", "globalPrivileges"})
 @Builder
 @Data
 public class Role extends BaseEntity {
@@ -30,6 +30,7 @@ public class Role extends BaseEntity {
             inverseJoinColumns = {@JoinColumn(name = "USER_ID")})
     private List<User> users = new ArrayList<>();
 
+    @JsonIgnore
     @Builder.Default
     @OneToMany(mappedBy = "role", cascade = CascadeType.PERSIST)
     private List<GlobalPrivilege> globalPrivileges = new ArrayList<>();

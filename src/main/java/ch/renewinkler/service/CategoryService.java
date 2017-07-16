@@ -15,10 +15,10 @@ public class CategoryService {
     @Autowired
     private CategoryRepository repo;
 
-    @PreAuthorize("hasAnyRole({'ROLE_ADMIN', 'ROLE_USER'})")
+    @PreAuthorize("hasAnyRole({'ROLE_MANAGER', 'ROLE_EMPLOYEE', 'ROLE_ANY'})")
     // This was the original PostFilter SPEL. Subsequently, it was placed in a separate class.
-    // @PostFilter("hasRole('ROLE_ADMIN') or filterObject.hasCustomPrivilege(authentication.name, T(ch.renewinkler.model.security.PrivilegeType).READ)")
-    @PostFilter("hasRole('ROLE_ADMIN') or hasPermission(filterObject, 'read')")
+    // @PostFilter("hasRole('ROLE_MANAGER') or hasRole('ROLE_EMPLOYEE') or filterObject.hasCustomPrivilege(authentication.name, T(ch.renewinkler.model.security.PrivilegeType).READ)")
+    @PostFilter("hasRole('ROLE_MANAGER') or hasRole('ROLE_EMPLOYEE') or hasPermission(filterObject, 'read')")
     public List<Category> findAll() {
         return repo.findAll();
     }

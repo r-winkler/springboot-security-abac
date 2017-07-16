@@ -13,8 +13,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
-@ToString
+@ToString(exclude = {"roles", "customPrivileges"})
 @Builder
 @Data
 public class User extends BaseEntity {
@@ -31,6 +30,7 @@ public class User extends BaseEntity {
 
     private boolean enabled;
 
+    @JsonIgnore
     @Builder.Default
     @ManyToMany(mappedBy = "users")
     private List<Role> roles = new ArrayList<>();

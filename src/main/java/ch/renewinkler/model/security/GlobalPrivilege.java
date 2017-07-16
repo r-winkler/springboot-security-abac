@@ -1,23 +1,21 @@
 package ch.renewinkler.model.security;
 
 import ch.renewinkler.model.BaseEntity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Enumerated;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
-@ToString
 @Builder
 @Data
 public class GlobalPrivilege extends BaseEntity {
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private PrivilegeType type;
 
     @ManyToOne

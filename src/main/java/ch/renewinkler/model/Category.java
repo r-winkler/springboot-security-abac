@@ -10,7 +10,6 @@ import javax.validation.constraints.Size;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @ToString
 @Builder
 @Data

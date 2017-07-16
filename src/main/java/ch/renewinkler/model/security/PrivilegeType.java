@@ -5,6 +5,7 @@ public enum PrivilegeType {
     CREATE,
     READ,
     UPDATE,
-    DELETE
+    DELETE,
+    SALARY
 
 }

@@ -28,9 +28,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable() // for h2 console
                 .headers().frameOptions().disable() // for h2 console
                 .and()
-                .authorizeRequests().anyRequest().authenticated()
+                .authorizeRequests().antMatchers("/employees/salary").access("@userPermission.hasPermission(authentication.name)")
                 .and()
                 .authorizeRequests().antMatchers("/h2-console/**").permitAll()
+                .and()
+                .authorizeRequests().anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .and()

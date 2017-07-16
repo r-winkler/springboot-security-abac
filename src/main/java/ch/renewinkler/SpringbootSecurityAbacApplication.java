@@ -2,10 +2,7 @@ package ch.renewinkler;
 
 import ch.renewinkler.model.Category;
 import ch.renewinkler.model.Employee;
-import ch.renewinkler.model.security.CustomPrivilege;
-import ch.renewinkler.model.security.PrivilegeType;
-import ch.renewinkler.model.security.Role;
-import ch.renewinkler.model.security.User;
+import ch.renewinkler.model.security.*;
 import ch.renewinkler.repository.CategoryRepository;
 import ch.renewinkler.repository.EmployeeRepository;
 import ch.renewinkler.repository.RoleRepository;
@@ -58,44 +55,50 @@ public class SpringbootSecurityAbacApplication implements CommandLineRunner {
         employeeRepos.save(Arrays.asList(employee1, employee2, employee3, employee4));
 
         // roles and users
-        Role adminRole = Role.builder().name("ROLE_ADMIN").build();
-        Role userRole = Role.builder().name("ROLE_USER").build();
+        Role managerRole = Role.builder().name("ROLE_MANAGER").build();
+        Role employeeRole = Role.builder().name("ROLE_EMPLOYEE").build();
         Role anyRole = Role.builder().name("ROLE_ANY").build();
-        User admin = User.builder().username("admin")
-                .password(passwordEncoder.encode("admin"))
+        User manager = User.builder().username("manager")
+                .password(passwordEncoder.encode("manager"))
                 .enabled(true).build();
-        User user = User.builder().username("user")
+        User employee = User.builder().username("user")
                 .password(passwordEncoder.encode("user"))
                 .enabled(true).build();
         User any = User.builder().username("any")
                 .password(passwordEncoder.encode("any"))
                 .enabled(true).build();
-        admin.addRole(adminRole);
-        user.addRole(userRole);
+        manager.addRole(managerRole);
+        employee.addRole(employeeRole);
         any.addRole(anyRole);
-        roleRepo.save(adminRole);
-        roleRepo.save(userRole);
+
+        // global privilege
+        GlobalPrivilege globalPrivilege = GlobalPrivilege.builder()
+                .type(PrivilegeType.SALARY)
+                .role(anyRole)
+                .build();
+        anyRole.addGlobalPrivilege(globalPrivilege);
+
+        roleRepo.save(managerRole);
+        roleRepo.save(employeeRole);
         roleRepo.save(anyRole);
 
         // custom privileges
         CustomPrivilege customPrivilege1 = CustomPrivilege.builder()
                 .type(PrivilegeType.READ)
-                .user(user)
+                .user(any)
                 .build();
         CustomPrivilege customPrivilege2 = CustomPrivilege.builder()
                 .type(PrivilegeType.READ)
-                .user(user)
+                .user(any)
                 .build();
         CustomPrivilege customPrivilege3 = CustomPrivilege.builder()
                 .type(PrivilegeType.READ)
-                .user(user)
+                .user(any)
                 .build();
         CustomPrivilege customPrivilege4 = CustomPrivilege.builder()
                 .type(PrivilegeType.READ)
-                .user(user)
+                .user(any)
                 .build();
-        user.addCustomPrivilege(customPrivilege1);
-        user.addCustomPrivilege(customPrivilege2);
         category2.addCustomPrivilege(customPrivilege1);
         category4.addCustomPrivilege(customPrivilege2);
         employee3.addCustomPrivilege(customPrivilege3);
