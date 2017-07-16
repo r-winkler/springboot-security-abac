@@ -1,9 +1,14 @@
 package ch.renewinkler.repository;
 
 import ch.renewinkler.model.Employee;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.Repository;
 
-public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+import java.util.List;
 
+public interface EmployeeRepository extends Repository<Employee, Long> {
+
+    List<Employee> findAll();
+
+    List<Employee> save(Iterable<Employee> employees);
 
 }

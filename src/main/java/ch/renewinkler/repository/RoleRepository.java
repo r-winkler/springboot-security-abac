@@ -1,7 +1,10 @@
 package ch.renewinkler.repository;
 
 import ch.renewinkler.model.security.Role;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.Repository;
 
-public interface RoleRepository extends JpaRepository<Role, Long> {
+public interface RoleRepository extends Repository<Role, Long> {
+
+    Role save(Role role);
+
 }
