@@ -3,7 +3,6 @@ package ch.renewinkler.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,7 +13,6 @@ import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import javax.sql.DataSource;
 
 @Configuration
-@Import(DataSourceConfig.class)
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -27,8 +25,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable() // for h2 console
                 .headers().frameOptions().disable() // for h2 console
-                .and()
-                .authorizeRequests().antMatchers("/employees/salary").access("@userPermission.hasPermission(authentication.name)")
                 .and()
                 .authorizeRequests().antMatchers("/h2-console/**").permitAll()
                 .and()
