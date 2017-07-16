@@ -16,7 +16,7 @@ public class EmployeeService {
     private EmployeeRepository repo;
 
     @PreAuthorize("hasAnyRole({'ROLE_MANAGER', 'ROLE_EMPLOYEE', 'ROLE_ANY'})")
-    @PostFilter("hasRole('ROLE_MANAGER') or hasRole('ROLE_EMPLOYEE') or hasRole('ROLE_ANY') and hasPermission(filterObject, 'read')")
+    @PostFilter("hasAnyRole('ROLE_MANAGER', 'ROLE_EMPLOYEE') or hasPermission(filterObject, 'read')")
     public List<Employee> findAll() {
         return repo.findAll();
     }
