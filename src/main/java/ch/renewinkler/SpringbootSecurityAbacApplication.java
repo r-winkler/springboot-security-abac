@@ -79,27 +79,27 @@ public class SpringbootSecurityAbacApplication implements CommandLineRunner {
         roleRepo.save(employeeRole);
         roleRepo.save(anyRole);
 
-        // custom privileges
-        CustomPrivilege customPrivilege1 = CustomPrivilege.builder()
+        // user privileges
+        UserPrivilege userPrivilege1 = UserPrivilege.builder()
                 .type(PrivilegeType.READ)
                 .user(any)
                 .build();
-        CustomPrivilege customPrivilege2 = CustomPrivilege.builder()
+        UserPrivilege userPrivilege2 = UserPrivilege.builder()
                 .type(PrivilegeType.READ)
                 .user(any)
                 .build();
-        CustomPrivilege customPrivilege3 = CustomPrivilege.builder()
+        UserPrivilege userPrivilege3 = UserPrivilege.builder()
                 .type(PrivilegeType.READ)
                 .user(any)
                 .build();
-        CustomPrivilege customPrivilege4 = CustomPrivilege.builder()
+        UserPrivilege userPrivilege4 = UserPrivilege.builder()
                 .type(PrivilegeType.READ)
                 .user(any)
                 .build();
-        category2.addCustomPrivilege(customPrivilege1);
-        category4.addCustomPrivilege(customPrivilege2);
-        employee3.addCustomPrivilege(customPrivilege3);
-        employee4.addCustomPrivilege(customPrivilege4);
+        category2.addUserPrivilege(userPrivilege1);
+        category4.addUserPrivilege(userPrivilege2);
+        employee3.addUserPrivilege(userPrivilege3);
+        employee4.addUserPrivilege(userPrivilege4);
         categoryRepo.save(Arrays.asList(category2, category4));
         employeeRepos.save(Arrays.asList(employee3, employee4));
 

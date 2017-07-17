@@ -18,10 +18,10 @@ public abstract class PrivilegeEntity extends BaseEntity {
     @JsonIgnore
     @Builder.Default
     @OneToMany(mappedBy = "privilegeEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CustomPrivilege> customPrivileges = new ArrayList<>();
+    private List<UserPrivilege> userPrivileges = new ArrayList<>();
 
-    public boolean hasCustomPrivilege(String name, PrivilegeType type) {
-        return customPrivileges.stream()
+    public boolean hasUserPrivilege(String name, PrivilegeType type) {
+        return userPrivileges.stream()
                 .filter(c -> c.getUser().getUsername().equals(name))
                 .map(c -> c.getType())
                 .filter(t -> t.equals(type))
@@ -29,14 +29,14 @@ public abstract class PrivilegeEntity extends BaseEntity {
                 .isPresent();
     }
 
-    public void addCustomPrivilege(CustomPrivilege customPrivilege) {
-        customPrivileges.add(customPrivilege);
-        customPrivilege.setPrivilegeEntity(this);
+    public void addUserPrivilege(UserPrivilege userPrivilege) {
+        userPrivileges.add(userPrivilege);
+        userPrivilege.setPrivilegeEntity(this);
     }
 
-    public void removeCustomPrivilege(CustomPrivilege customPrivilege) {
-        customPrivileges.remove(customPrivilege);
-        customPrivilege.setPrivilegeEntity(null);
+    public void removeUserPrivilege(UserPrivilege userPrivilege) {
+        userPrivileges.remove(userPrivilege);
+        userPrivilege.setPrivilegeEntity(null);
     }
 
 }

@@ -13,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Data
-public class CustomPrivilege extends BaseEntity {
+public class UserPrivilege extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private PrivilegeType type;

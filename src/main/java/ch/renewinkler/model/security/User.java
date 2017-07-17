@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = {"roles", "customPrivileges"})
+@ToString(exclude = {"roles", "userPrivileges"})
 @Builder
 @Data
 public class User extends BaseEntity {
@@ -38,16 +38,16 @@ public class User extends BaseEntity {
     @JsonIgnore
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CustomPrivilege> customPrivileges = new ArrayList<>();
+    private List<UserPrivilege> userPrivileges = new ArrayList<>();
 
-    public void addCustomPrivilege(CustomPrivilege customPrivilege) {
-        customPrivileges.add(customPrivilege);
-        customPrivilege.setUser(this);
+    public void addUserPrivilege(UserPrivilege userPrivilege) {
+        userPrivileges.add(userPrivilege);
+        userPrivilege.setUser(this);
     }
 
-    public void removeCustomPrivilege(CustomPrivilege customPrivilege) {
-        customPrivileges.remove(customPrivilege);
-        customPrivilege.setUser(null);
+    public void removeUserPrivilege(UserPrivilege userPrivilege) {
+        userPrivileges.remove(userPrivilege);
+        userPrivilege.setUser(null);
     }
 
     public void addRole(Role role) {

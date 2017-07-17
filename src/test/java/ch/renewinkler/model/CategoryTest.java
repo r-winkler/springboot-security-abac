@@ -1,7 +1,7 @@
 package ch.renewinkler.model;
 
-import ch.renewinkler.model.security.CustomPrivilege;
 import ch.renewinkler.model.security.PrivilegeType;
+import ch.renewinkler.model.security.UserPrivilege;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -10,15 +10,15 @@ import java.util.List;
 public class CategoryTest {
 
     @Test
-    public void testHasCustomPrivilege() {
+    public void testHasUserPrivilege() {
         Category category = Category.builder().name("category").build();
-        CustomPrivilege customPrivilege = CustomPrivilege.builder().privilegeEntity(category).type(PrivilegeType.READ).build();
-        List<CustomPrivilege> customPrivileges = new ArrayList<>();
-        customPrivileges.add(customPrivilege);
-        category.setCustomPrivileges(customPrivileges);
+        UserPrivilege userPrivilege = UserPrivilege.builder().privilegeEntity(category).type(PrivilegeType.READ).build();
+        List<UserPrivilege> userPrivileges = new ArrayList<>();
+        userPrivileges.add(userPrivilege);
+        category.setUserPrivileges(userPrivileges);
 
-//        assertTrue(category.hasCustomPrivilege(PrivilegeType.READ));
-//        assertFalse(category.hasCustomPrivilege(PrivilegeType.CREATE));
+//        assertTrue(category.hasUserPrivilege(PrivilegeType.READ));
+//        assertFalse(category.hasUserPrivilege(PrivilegeType.CREATE));
     }
 
 }

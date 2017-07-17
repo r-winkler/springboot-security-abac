@@ -14,16 +14,16 @@ public class EntityPermissionEvaluator implements PermissionEvaluator {
         if (target instanceof PrivilegeEntity) {
             PrivilegeEntity entity = (PrivilegeEntity) target;
             if ("create".equals(permission)) {
-                return entity.hasCustomPrivilege(authentication.getName(), PrivilegeType.CREATE);
+                return entity.hasUserPrivilege(authentication.getName(), PrivilegeType.CREATE);
             }
             if ("read".equals(permission)) {
-                return entity.hasCustomPrivilege(authentication.getName(), PrivilegeType.READ);
+                return entity.hasUserPrivilege(authentication.getName(), PrivilegeType.READ);
             }
             if ("update".equals(permission)) {
-                return entity.hasCustomPrivilege(authentication.getName(), PrivilegeType.UPDATE);
+                return entity.hasUserPrivilege(authentication.getName(), PrivilegeType.UPDATE);
             }
             if ("delete".equals(permission)) {
-                return entity.hasCustomPrivilege(authentication.getName(), PrivilegeType.DELETE);
+                return entity.hasUserPrivilege(authentication.getName(), PrivilegeType.DELETE);
             }
         }
         throw new UnsupportedOperationException(
