@@ -3,6 +3,7 @@ package ch.renewinkler.model.security;
 import ch.renewinkler.model.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.Immutable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -38,17 +39,8 @@ public class User extends BaseEntity {
     @JsonIgnore
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Immutable // these privileges are managed by the PrivilegeEntity
     private List<UserPrivilege> userPrivileges = new ArrayList<>();
-
-    public void addUserPrivilege(UserPrivilege userPrivilege) {
-        userPrivileges.add(userPrivilege);
-        userPrivilege.setUser(this);
-    }
-
-    public void removeUserPrivilege(UserPrivilege userPrivilege) {
-        userPrivileges.remove(userPrivilege);
-        userPrivilege.setUser(null);
-    }
 
     public void addRole(Role role) {
         roles.add(role);
